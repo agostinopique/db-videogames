@@ -163,3 +163,13 @@
 
 
 ---- 7- Selezionare quali giochi erano presenti nei tornei nei quali hanno partecipato i giocatori il cui nome inizia per 'S' (474)
+--SELECT DISTINCT videogames.name
+--FROM players
+--JOIN player_tournament
+--ON players.id = player_tournament.player_id
+--JOIN tournament_videogame
+--ON player_tournament.tournament_id = tournament_videogame.tournament_id
+--JOIN videogames
+--ON tournament_videogame.videogame_id = videogames.id
+--WHERE players.name LIKE 'S%';
+
