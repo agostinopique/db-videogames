@@ -112,10 +112,54 @@
 --ON players.id = reviews.player_id;
 
 ---- 2- Selezionare tutti i videogame dei tornei tenuti nel 2016, mostrandoli una sola volta (226)
-SELECT videogames.name
-FROM videogames 
-JOIN tournament_videogame
-ON videogames.id = tournament_videogame.videogame_id
-JOIN tournaments
-ON tournament_videogame.tournament_id = tournaments.id
-WHERE tournaments.year BETWEEN '01/01/2016' AND '12/31/2016'; 
+--SELECT DISTINCT videogames.name
+--FROM videogames 
+--JOIN tournament_videogame
+--ON videogames.id = tournament_videogame.videogame_id
+--JOIN tournaments
+--ON tournament_videogame.tournament_id = tournaments.id
+--WHERE tournaments.year = 2016; 
+
+---- 3- Mostrare le categorie di ogni videogioco (1718)
+--SELECT categories.name, videogames.id AS videogame_id, videogames.name AS videogame_name
+--FROM categories
+--JOIN category_videogame
+--ON categories.id = category_videogame.category_id
+--JOIN videogames
+--ON category_videogame.videogame_id = videogames.id;
+
+---- 4- Selezionare i dati di tutte le software house che hanno rilasciato almeno un gioco dopo il 2020, mostrandoli una sola volta (6)
+--SELECT DISTINCT software_houses.name, software_houses.tax_id, software_houses.city, software_houses.country
+--FROM software_houses
+--JOIN videogames 
+--ON software_houses.id = videogames.software_house_id;
+
+---- 5- Selezionare i premi ricevuti da ogni software house per i videogiochi che ha prodotto (55)
+--SELECT awards.name, software_houses.id, software_houses.name, software_houses.country, videogames.id, videogames.name
+--FROM awards
+--JOIN award_videogame
+--ON awards.id = award_videogame.award_id
+--JOIN videogames 
+--ON award_videogame.videogame_id = videogames.id
+--JOIN software_houses
+--ON videogames.software_house_id = software_houses.id;
+
+
+---- 6- Selezionare categorie e classificazioni PEGI dei videogiochi che hanno ricevuto
+---- recensioni da 4 e 5 stelle, mostrandole una sola volta (3363)
+--SELECT DISTINCT videogames.name, pegi_labels.name, categories.name
+--FROM pegi_labels 
+--JOIN pegi_label_videogame 
+--ON pegi_labels.id = pegi_label_videogame.pegi_label_id
+--JOIN videogames 
+--ON pegi_label_videogame.videogame_id = videogames.id
+--JOIN reviews
+--ON videogames.id = reviews.videogame_id
+--JOIN category_videogame
+--ON videogames.id = category_videogame.videogame_id
+--JOIN categories 
+--ON category_videogame.category_id = categories.id
+--WHERE reviews.rating BETWEEN 4 AND 5;
+
+
+---- 7- Selezionare quali giochi erano presenti nei tornei nei quali hanno partecipato i giocatori il cui nome inizia per 'S' (474)
